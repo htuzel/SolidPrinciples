@@ -20,4 +20,4 @@ class Car implements Vehicle {
 
 const car = new Car(4, "left");
 
-console.log(car.getStatus(100)); //OK
+console.log(car.getStatus(100)); //OK 
