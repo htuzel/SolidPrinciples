@@ -8,19 +8,11 @@ class Vehicle {
     run () {
         console.log("Running");
     }
-
-    fly () {
-        console.log("Flying");
-    }
 }
 
 class Car extends Vehicle {
     constructor() {
         super();
-    }
-
-    fly () {
-        console.log("Error");
     }
 }
 
@@ -28,25 +20,40 @@ class Helicopter extends Vehicle {
     constructor() {
         super();
     }
+
+    fly () {
+        console.log("Flying");
+    }
 }
 
 class Fleet {
 
-    constructor(vehicles, buildings) {
-        this.vehicles = vehicles;
+    constructor (vehicles) {
+        this.cars = [];
+        this.helicopters = [];
+        this.setVehicles(vehicles)
+    }
+
+    setVehicles (vehicles) {
+        vehicles.forEach(vehicle => {
+            if (vehicle instanceof Helicopter) {
+                this.helicopters.push(vehicle);
+            } else {
+                this.cars.push(vehicle);
+            }
+        })
     }
 
     runAll () {
-        this.vehicles.forEach(vehicle => {
+        var vehicles = this.cars.concat(this.helicopters);
+        vehicles.forEach(vehicle => {
             vehicle.run();
         });
     }
 
     flyAll () {
-        this.vehicles.forEach(vehicle => {
-            if (vehicle instanceof Helicopter) { //We need to check its type to prevent error
-                vehicle.fly();
-            }
+        this.helicopters.forEach(vehicle => { //Don't need a check
+            vehicle.fly();
         });
     }
 }
